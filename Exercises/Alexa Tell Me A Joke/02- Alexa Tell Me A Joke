@@ -1,0 +1,14 @@
+from tkinter import *
+import random
+import tkinter.messagebox
+
+JOKES = "BSU-CS2-A1-CODELAB2/Exercises/Alexa Tell Me A Joke/randomJokes.txt"
+
+def load_joke():
+    joke = []
+    
+
+
+
+
+
