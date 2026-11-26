@@ -1,12 +1,50 @@
+#I'm using tkinter to make a GUI so I import 
+# tkinter library and random to select a random joke
+
 from tkinter import *
 import random
 import tkinter.messagebox
 
-JOKES = "BSU-CS2-A1-CODELAB2/Exercises/Alexa Tell Me A Joke/randomJokes.txt"
+#Assigning a variable for the joke file
+JOKES = "BSU-CS2-A1-CODELAB2/Code Exercises/Alexa Tell Me A Joke/randomJokes.txt"
+joke = [] #Make joke an empty list
+
+def main():
+    root = Tk()
+    try:
+        joke = load_joke(JOKES)
+    except FileNotFoundError:
+        messagebox.showerror("Error no file found")
+
 
 def load_joke():
-    joke = []
-    
+    #I use with to ensure that the file is properly closed after a block ends even if an error occurs
+    # I'm using "with" instead of try and finally because it's better practice and more readable
+    with open(JOKES, "r", encoding="utf-8") as joke_file:
+        for line in joke_file:
+            line = line.strip()
+            if not line:
+                continue
+            # Skips empty lines
+            if "?"not in line: #Skips lines that aren't jokes
+                continue
+            # Splits the line into setup and punchline at the first "?"
+                setup, punchline = line.split("?", 1)
+                setup = setup.strip() + "?" #Adding back the "?" because it was removed from split
+                punchline = punchline.strip() #Clean up punchline
+                if punchline:
+                    joke.append((setup, punchline)) #Adds to joke list as a pair if punchline is not empty
+    return joke #Return the list back to function that called
+
+class Jokelexa:
+    def __init__ (self, root, joke):
+
+
+
+
+
+if __name__ == "__main__": #calls main if file is run
+    main()  
 
 
 
